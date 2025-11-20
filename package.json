@@ -1,0 +1,31 @@
+{
+  "name": "members-only",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itssduy/members-only.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/itssduy/members-only/issues"
+  },
+  "homepage": "https://github.com/itssduy/members-only#readme",
+  "dependencies": {
+    "connect-pg-simple": "^10.0.0",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.16.3"
+  }
+}
