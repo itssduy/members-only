@@ -40,9 +40,18 @@ module.exports = passport;
 
 
 passport.serializeUser((user, done) => {
-
+    done(null, user.id)
 })
 
-passport.deserializeUser((user, done) => {
+passport.deserializeUser(async (userId, done) => {
+    try {
+        user = await pool.query('SELECT * FROM users WHERE id=$1', [userId]);
+        if(user){
+            done(null, user);
+        }
+    } 
+    catch (err){
+        done(err);
+    }
 
 })

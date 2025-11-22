@@ -7,7 +7,7 @@ const authRoute = express();
 
 
 authRoute.get('/login', authController.getLogin);
-authRoute.post('/login', passport.authenticate('local'), authController.postLogin);
+authRoute.post('/login', passport.authenticate('local', {failureRedirect: '/auth/login', successRedirect: '/users'}));
 
 
 authRoute.get('/signup', authController.getSignup);
