@@ -1,3 +1,6 @@
+const { genPassword } = require("../lib/passwordUtils")
+const pool = require("../models/pool")
+
 const getLogin = (req, res) => {
     res.render('login')
 }
@@ -11,7 +14,18 @@ const getSignup = (req, res) => {
 }
 
 const postSignup = (req, res) => {
-    
+    const saltHash = genPassword(req.body.password);
+
+    const salt = saltHash.salt;
+    const hash = saltHash.hash;
+
+    pool.query('INSERT INTO users(username, salt, hash) VALUES ($1, $2, $3)', [req.body.username, salt, hash]), (err, result) => {
+        if (err) {
+            return res.status(500).send('Error creating user');
+        }
+    }
+
+    res.redirect('/login');
 }
 
 
