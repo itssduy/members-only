@@ -1,11 +1,12 @@
 const express = require('express');
+const isAuth = require('../middleware/authMiddleware.js');
 
 const publicController = require('../controllers/publicController');
-const userRoute = express();
+const publicRoute = express();
 
 
-userRoute.get('/', publicController.getHome);
+publicRoute.get('/', publicController.getHome);
 
 
 
-module.exports = userRoute;
+module.exports = publicRoute;

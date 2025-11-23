@@ -1,5 +1,5 @@
 const getHome = (req,res) => {
-    res.render('home')
+    res.render('public/home')
 }
 
 

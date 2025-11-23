@@ -2,7 +2,7 @@ const { genPassword } = require("../lib/passwordUtils")
 const pool = require("../models/pool")
 
 const getLogin = (req, res) => {
-    res.render('login')
+    res.render('auth/login')
 }
 
 const postLogin = (req, res) => {
@@ -10,7 +10,7 @@ const postLogin = (req, res) => {
 }
 
 const getSignup = (req, res) => {
-    res.render('signup')
+    res.render('auth/signup')
 }
 
 const postSignup = async (req, res) => {

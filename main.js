@@ -11,7 +11,7 @@ const PORT = process.env.PORT
 
 const publicRoutes = require('./routes/publicRoutes');
 const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
+const postRoutes = require('./routes/postRoutes');
 const passport = require('passport');
 
 const app = express();
@@ -34,7 +34,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge: 1000 * 60 // 1 minute
+        maxAge: 1000 * 60 * 60 // 1 hour
     }
 }))
 
@@ -43,7 +43,7 @@ app.use(passport.session());
 //routes
 app.use('/', publicRoutes);
 app.use('/auth', authRoutes);
-app.use('/users', userRoutes);
+app.use('/posts', postRoutes);
 
 
 //server
