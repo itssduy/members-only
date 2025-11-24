@@ -11,8 +11,13 @@ const getAllPosts = async ()=>{
     return rows;
 }
 
+const getPost = async (id)=>{
+    const { rows } = await db.query('SELECT * FROM posts WHERE id=$1', [id]);
+    return rows[0];
+}
 
 module.exports = {
     getAllPosts,
-    createPost
+    createPost,
+    getPost
 }

@@ -7,6 +7,7 @@
 
     <% posts.map(x => { %>
         <li>
+            <a href="/posts/<%= x.id%>">View</a>
             <h1><%= x.title %></h1>
             <p><%= x.text %></p>
         </li>

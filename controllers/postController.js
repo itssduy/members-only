@@ -5,8 +5,11 @@ const getDashboard = async (req,res) => {
     res.render('posts/dashboard', {posts: posts})
 }
 
-const getPost = (req, res) => {
-    res.render('posts/view')
+const getPost = async (req, res) => {
+    const {id} = req.params;
+    const post = await query.getPost(id);
+    console.log(post);
+    res.render('posts/view', {post: post});
 }
 
 
@@ -23,7 +26,7 @@ const postNewPost = async (req, res) => {
     //make a psql query
     const post = await query.createPost(title, text, userId);
     //redirect to post page
-   res.redirect(`posts/${post.id}`);
+   res.redirect(`${post.id}`);
 }
 
 
