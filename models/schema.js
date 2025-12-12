@@ -12,7 +12,11 @@ const SQL = `
 
     CREATE TABLE users (
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+        first_name CHAR(255) NOT NULL,
+        last_name CHAR(255) NOT NULL,
         username VARCHAR(255) UNIQUE NOT NULL,
+        membership BOOLEAN DEFAULT FALSE,
+        email TEXT,
         hash TEXT NOT NULL,
         salt TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -24,6 +28,7 @@ const SQL = `
         title VARCHAR(255),
         text TEXT NOT NULL,
         likes INTEGER DEFAULT 0,
+        dislikes INTEGER DEFAULT 0,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
@@ -33,6 +38,7 @@ const SQL = `
         postId INTEGER NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
         text TEXT NOT NULL,
         likes INTEGER DEFAULT 0,
+        dislikes INTEGER DEFAULT 0,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 `;

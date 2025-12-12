@@ -16,6 +16,10 @@ const passport = require('passport');
 
 const app = express();
 
+//assets
+const assetsPath = path.join(__dirname, 'public');
+app.use(express.static(assetsPath));
+
 //ejs
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

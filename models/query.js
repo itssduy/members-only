@@ -16,8 +16,21 @@ const getPost = async (id)=>{
     return rows[0];
 }
 
+const getUser = async (id)=>{
+    const { rows } = await db.query('SELECT * FROM users WHERE id=$1', [id]);
+    return rows[0];
+}
+
+const getMembership = async (id) => {
+    const { rows } = await db.query('SELECT (membership) FROM users WHERE id=$1', [id]);
+    return rows[0].membership;
+}
+
+
 module.exports = {
     getAllPosts,
     createPost,
-    getPost
+    getPost,
+    getUser,
+    getMembership
 }

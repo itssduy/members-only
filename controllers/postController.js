@@ -8,8 +8,8 @@ const getDashboard = async (req,res) => {
 const getPost = async (req, res) => {
     const {id} = req.params;
     const post = await query.getPost(id);
-    console.log(post);
-    res.render('posts/view', {post: post});
+    const user = await query.getUser(post.authorid);
+    res.render('posts/view', {post: post, author: user.username});
 }
 
 
@@ -20,6 +20,11 @@ const getNewPost = (req, res) => {
 const postNewPost = async (req, res) => {
     const { title, text } = req.body;
     const userId = req.user.rows[0].id
+
+    if(!userId){
+        return;
+    }
+
     //validate and sanitize data
 
 
