@@ -24,23 +24,31 @@ const SQL = `
 
     CREATE TABLE posts (
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-        authorId INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        authorid INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
         title VARCHAR(255),
         text TEXT NOT NULL,
-        likes INTEGER DEFAULT 0,
-        dislikes INTEGER DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    
+    CREATE TABLE comments (
+        id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+        authorid INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        postid INTEGER NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
+        text TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
-    CREATE TABLE comments (
+    CREATE TABLE likeToPostsRelation (
         id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-        authorId INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-        postId INTEGER NOT NULL REFERENCES posts(id) ON DELETE CASCADE,
-        text TEXT NOT NULL,
-        likes INTEGER DEFAULT 0,
-        dislikes INTEGER DEFAULT 0,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
+        userId INTEGER NOT NULL,
+        status INTEGER
+    )
+
+    CREATE TABLE likeToCommentsRelation (
+        id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+        userId INTEGER NOT NULL,
+        status INTEGER
+    )
 `;
 
 pool.query(SQL, (err, result) => {

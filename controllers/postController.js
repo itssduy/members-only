@@ -8,8 +8,16 @@ const getDashboard = async (req,res) => {
 const getPost = async (req, res) => {
     const {id} = req.params;
     const post = await query.getPost(id);
-    const user = await query.getUser(post.authorid);
-    res.render('posts/view', {post: post, author: user.username});
+    const author = await query.getUser(post.authorid);
+    const userId = req.session.passport.user
+    const comments = await query.getCommentsFromPost(post.id);
+
+    //sort comments by descending order
+    comments.sort(function(x,y){
+        return y.created_at - x.created_at;
+    })
+
+    res.render('posts/view', {post: post, author: author.username, comments: comments, userId: userId});
 }
 
 
@@ -47,6 +55,26 @@ const deletePost = (req, res) => {
 }
 
 
+const postComment = async (req, res) => {
+    const text = req.body.comment
+    const postId = req.params.id
+    const userId = req.session.passport.user
+
+    const newComment = await query.createComment(postId, userId, text);
+    res.redirect(`/posts/${postId}`);
+}
+
+const deleteComment = async(req, res) => {
+    const commentId = req.params.commentId
+    const postId = req.params.postId
+
+    const userId = req.session.passport.user
+
+    await query.deleteComment(commentId, userId);
+    res.redirect(`/posts/${postId}`);
+
+}
+
 module.exports = {
     getDashboard,
     getPost,
@@ -54,5 +82,7 @@ module.exports = {
     postNewPost,
     getEditPost,
     postEditPost,
-    deletePost
+    deletePost,
+    postComment,
+    deleteComment
 }
