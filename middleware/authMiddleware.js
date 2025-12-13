@@ -16,7 +16,7 @@ const isMember = async (req, res, next)=>{
     if(membership){
             next();
     } else {
-        res.redirect('/auth/login')
+        res.redirect('/posts/secret')
         //res.status(401).json({msg: 'you are not authorized to view this page'});
     }
 }

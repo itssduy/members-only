@@ -47,6 +47,10 @@ const deleteComment = async (id, userId) => {
     return rows;
 }
 
+const addMembership = async(id) => {
+    const { rows } = await db.query('UPDATE users SET membership=true WHERE id=$1', [id]);
+    return rows;
+}
 
 module.exports = {
     getAllPosts,
@@ -57,5 +61,6 @@ module.exports = {
     getComment,
     getCommentsFromPost,
     createComment,
-    deleteComment
+    deleteComment,
+    addMembership
 }

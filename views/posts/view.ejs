@@ -5,3 +5,25 @@
 by <%=author %>
 <p><%=post.text %></p>
 Likes: <%=post.likes %>
+
+<div>
+    <h1>Comments</h1>
+    <form action="/posts/<%= post.id %>/comment/new" method="post">
+        <h3>Add New Comment</h3>
+        <textarea name="comment" id="comment" placeholder="Comment"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <ul>
+        <% comments.map(x=>{ %>
+            <li> 
+                <%= x.text %> 
+                <% if(userId==x.authorid){ %>
+                    <form action="/posts/<%= post.id %>/<%= x.id %>/delete" method="post">
+                        <button type="submit">X</button>
+                    </form>
+                <%}%>
+            </li>
+        <% }) %>
+        
+    </ul>
+</div>

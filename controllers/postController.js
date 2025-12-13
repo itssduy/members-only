@@ -75,6 +75,23 @@ const deleteComment = async(req, res) => {
 
 }
 
+const getSecret = (req, res) => {
+    res.render('posts/secret');
+}
+
+const postSecret = (req, res) => {
+    const secretCode = 'bob';
+
+    if(req.body.code == secretCode){
+        const userId = req.session.passport.user
+
+        query.addMembership(userId)
+        res.redirect(`/posts`);
+    } else {
+        res.redirect('/posts/secret')
+    }
+}
+
 module.exports = {
     getDashboard,
     getPost,
@@ -84,5 +101,7 @@ module.exports = {
     postEditPost,
     deletePost,
     postComment,
-    deleteComment
+    deleteComment,
+    getSecret,
+    postSecret
 }
