@@ -35,10 +35,15 @@ const postSignup = async (req, res) => {
     res.redirect('/auth/login');
 }
 
+const postLogout = (req, res) => {
+    
+}
+
 
 module.exports = {
     getLogin,
     postLogin,
     getSignup,
-    postSignup
+    postSignup,
+    postLogout
 }

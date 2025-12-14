@@ -70,6 +70,9 @@ const deleteComment = async(req, res) => {
 
     const userId = req.session.passport.user
 
+    if(!userId){
+        res.redirect('/auth/login');
+    }
     await query.deleteComment(commentId, userId);
     res.redirect(`/posts/${postId}`);
 
@@ -92,6 +95,7 @@ const postSecret = (req, res) => {
     }
 }
 
+
 module.exports = {
     getDashboard,
     getPost,
@@ -103,5 +107,5 @@ module.exports = {
     postComment,
     deleteComment,
     getSecret,
-    postSecret
+    postSecret,
 }

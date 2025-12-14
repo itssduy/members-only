@@ -12,13 +12,21 @@ const isAuth = (req, res, next)=>{
 
 
 const isMember = async (req, res, next)=>{
-    const membership = await getMembership(req.session.passport.user)
-    if(membership){
+    try {
+        const user = (req.session.passport.user);
+        const membership = await getMembership(user)
+        if(membership){
             next();
-    } else {
-        res.redirect('/posts/secret')
-        //res.status(401).json({msg: 'you are not authorized to view this page'});
+        } else {
+            //res.status(401).json({msg: 'you are not authorized to view this page'});
+        }
+
     }
+    catch {
+        res.redirect('/posts')
+
+    }
+    
 }
 
 module.exports = {

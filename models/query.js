@@ -48,7 +48,7 @@ const deleteComment = async (id, userId) => {
 }
 
 const addMembership = async(id) => {
-    const { rows } = await db.query('UPDATE users SET membership=true WHERE id=$1', [id]);
+    const { rows } = await db.query('UPDATE users SET member=true WHERE id=$1', [id]);
     return rows;
 }
 

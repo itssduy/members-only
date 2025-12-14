@@ -7,19 +7,18 @@ const postRoute = express();
 postRoute.get('/secret', postController.getSecret);
 postRoute.post('/secret', postController.postSecret);
 
-postRoute.use(isAuth);
 postRoute.use(isMember);
 
-postRoute.post('/:id/comment/new', postController.postComment);
-postRoute.post('/:postId/:commentId/delete', postController.deleteComment);
+postRoute.post('/:id/comment/new', isAuth, postController.postComment);
+postRoute.post('/:postId/:commentId/delete', isAuth, postController.deleteComment);
 
-postRoute.get('/new', postController.getNewPost);
-postRoute.post('/new', postController.postNewPost);
+postRoute.get('/new', isAuth, postController.getNewPost);
+postRoute.post('/new', isAuth, postController.postNewPost);
 
-postRoute.get('/:id/edit', postController.getEditPost);
-postRoute.post('/:id/edit', postController.postEditPost);
+postRoute.get('/:id/edit', isAuth, postController.getEditPost);
+postRoute.post('/:id/edit', isAuth, postController.postEditPost);
 
-postRoute.delete('/:id/', postController.deletePost);
+postRoute.delete('/:id/', isAuth, postController.deletePost);
 
 postRoute.get('/', postController.getDashboard);
 postRoute.get('/:id/', postController.getPost);
